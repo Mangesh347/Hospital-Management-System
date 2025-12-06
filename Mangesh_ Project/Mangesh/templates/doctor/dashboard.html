@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Doctor Dashboard</h2>
+
+<p><a href="{% url 'add_availability' %}">Add Availability Slot</a></p>
+
+<h3>Your Availability Slots</h3>
+<table border="1">
+    <tr>
+        <th>Date</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Booked?</th>
+    </tr>
+    {% for slot in slots %}
+    <tr>
+        <td>{{ slot.date }}</td>
+        <td>{{ slot.start_time }}</td>
+        <td>{{ slot.end_time }}</td>
+        <td>{{ slot.is_booked }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">No slots yet.</td></tr>
+    {% endfor %}
+</table>
+
+<h3>Your Bookings</h3>
+<table border="1">
+    <tr>
+        <th>Patient</th>
+        <th>Start</th>
+        <th>Created</th>
+    </tr>
+    {% for booking in bookings %}
+    <tr>
+        <td>{{ booking.patient.username }}</td>
+        <td>{{ booking.start_datetime }}</td>
+        <td>{{ booking.created_at }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">No bookings yet.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

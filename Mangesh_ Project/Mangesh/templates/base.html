@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini HMS</title>
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+            Logged in as {{ user.username }} |
+            <a href="{% url 'dashboard' %}">Dashboard</a> |
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a> |
+            <a href="{% url 'doctor_signup' %}">Doctor Sign Up</a> |
+            <a href="{% url 'patient_signup' %}">Patient Sign Up</a>
+        {% endif %}
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

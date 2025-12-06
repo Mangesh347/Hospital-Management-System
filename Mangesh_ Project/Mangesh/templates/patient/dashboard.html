@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Patient Dashboard</h2>
+
+<h3>Available Doctors</h3>
+<ul>
+    {% for doctor in doctors %}
+    <li>
+        {{ doctor.username }} -
+        <a href="{% url 'doctor_detail' doctor.id %}">View Slots</a>
+    </li>
+    {% empty %}
+    <li>No doctors are available yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

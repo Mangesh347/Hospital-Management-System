@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Doctor: {{ doctor.username }}</h2>
+
+<h3>Available Slots</h3>
+<table border="1">
+    <tr>
+        <th>Date</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Action</th>
+    </tr>
+    {% for slot in slots %}
+    <tr>
+        <td>{{ slot.date }}</td>
+        <td>{{ slot.start_time }}</td>
+        <td>{{ slot.end_time }}</td>
+        <td>
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="hidden" name="slot_id" value="{{ slot.id }}">
+                <button type="submit">Book</button>
+            </form>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">No available slots.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}
